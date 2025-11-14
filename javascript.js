@@ -1,7 +1,4 @@
-let playerScore = 0;
-let computerScore = 0;
-playRound(getHumanChoice(), getComputerChoice());
-
+playGame();
 function getComputerChoice () {
     //get a random number between 1 and 3 and store it in a variable
     const choice = getRandomInt(1, 3);
@@ -32,22 +29,45 @@ function getHumanChoice () {
     }
 }
 
-function playRound (humanChoice, computerChoice) {
-    console.log(humanChoice);
-    console.log(computerChoice);
-    //if both choices are equal then result in a tie
-    if(humanChoice === computerChoice) {
-        console.log(`Tie! Score stays the same.\nComputer: ${computerScore}\nHuman: ${playerScore}`);
+function playGame () {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    //declare the game has started with a flavorful message
+    console.log('The measly human has rebelled against Ineffa our almighty overlord and challenged him to a battle of wits! A match of rock, paper and scissors!');
+    //play 5 rounds
+    for(let i = 0; i < 5; i++) {
+        playRound(getHumanChoice(), getComputerChoice());
     }
-    //if computer beat the human, result in computer win and log a message saying so
-    else if(computerChoice === 'rock' && humanChoice === 'scissors' || computerChoice === 'scissors' && humanChoice === 'paper' || computerChoice === 'paper' && humanChoice === 'rock') {
-        computerScore++;
-        console.log(`The mighty computer has thwarted the mere mortal's puny attacks!\nComputer: ${computerScore}\nHuman: ${playerScore}`);
+    //declare the winner by evaluating the scores
+    if(playerScore === computerScore) {
+        console.log(`Both combatants have showed a magnificent display of wit, but neither has the upper hand. The battle will be decided another time!\nFinal Score:\nIneffa - ${computerScore}\nHuman - ${playerScore}`);
     }
-    //if human beat the computer, result in human win and log a message saying so
+    else if(playerScore > computerScore) {
+        console.log(`The human has defeated the seemingly unbeatable Ineffa, what might the future hold after this outcome?\nFinal Score:\nHuman - ${playerScore}\nIneffa - ${computerScore}`)
+    }
     else {
-        playerScore++;
-        console.log(`The rebelious human has outmanuvered the cunning computer's schemes!\nComputer: ${computerScore}\nHuman: ${playerScore}`);
+        console.log(`The immortal Ineffa has outsmarted yet another of its challengers, an expected outcome.\nFinal Score:\nIneffa - ${computerScore}\nHuman - ${playerScore}`)
+    }
+
+
+    function playRound (humanChoice, computerChoice) {
+        console.log(humanChoice);
+        console.log(computerChoice);
+        //if both choices are equal then result in a tie
+        if(humanChoice === computerChoice) {
+            console.log(`Tie! Score stays the same.\nComputer: ${computerScore}\nHuman: ${playerScore}`);
+        }
+        //if computer beat the human, result in computer win and log a message saying so
+        else if(computerChoice === 'rock' && humanChoice === 'scissors' || computerChoice === 'scissors' && humanChoice === 'paper' || computerChoice === 'paper' && humanChoice === 'rock') {
+            computerScore++;
+            console.log(`The almighty Ineffa has thwarted the mere mortal's puny attacks!\nIneffa: ${computerScore}\nHuman: ${playerScore}`);
+        }
+        //if human beat the computer, result in human win and log a message saying so
+        else {
+            playerScore++;
+            console.log(`The rebelious human has outmanuvered the cunning Ineffa's schemes!\nIneffa: ${computerScore}\nHuman: ${playerScore}`);
+        }
     }
 }
 
